@@ -26,7 +26,7 @@ public class PruebaUso {
         int numThreads = 4;
 
         // Ejecuta una evaluación concreta (instancia + hilos).
-        //TP.evaluarPractica(instancia, numThreads);
+        TP.evaluarPractica(instancia, numThreads);
 
         // --- Ejemplos opcionales (tiradas más completas) ---
         // Ejecutar todas las prácticas/instancias disponibles.

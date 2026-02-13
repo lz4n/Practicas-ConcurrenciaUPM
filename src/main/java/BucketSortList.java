@@ -26,60 +26,83 @@ public class BucketSortList implements TesterRun {
 
         // El algoritmo asume num_threads >= 2; para un solo hilo debe usarse ordenación secuencial
         if (num_threads == 1) {
-            /* A COMPLETAR POR EL ALUMNO */;
-            return sorted;            
+            Collections.sort(numbers);
+            return new ArrayList<>(numbers);
         }
 
         // Rango teórico de valores (mínimo y máximo del tipo int)
-        double max = /* A COMPLETAR POR EL ALUMNO */; // Valor máximo del rango
-
+        double max = Integer.MAX_VALUE; // Valor máximo del rango
+        double min = Integer.MIN_VALUE; // Valor mínimo del rango
         // 'amp' representa el ancho (amplitud) de cada bucket; se distribuye el rango completo entre num_threads-1 divisiones
         // Si num_threads == 1, esto puede provocar división por cero; la práctica asume num_threads >= 2.
         // Se divide el rango (max - min) entre (num_threads - 1) para asegurar que el valor máximo
         // se asigne al último bucket (índice num_threads - 1) al calcular:
-        //     bucket = floor((x - min) / amp)
+        //     bucket = floor((number + |min|) / amp)
         // De este modo se evita que x == max genere un índice fuera de rango.
-        double amp = /* A COMPLETAR POR EL ALUMNO */;
+        double amp = (max - min) / (num_threads - 1) /* A COMPLETAR POR EL ALUMNO */;
 
         // Resultado final que contendrá la concatenación de todos los buckets ordenados
         ArrayList<Integer> numbersSort = new ArrayList<>();
 
         // Lista de buckets: cada bucket es una ArrayList<Integer>
         ArrayList<ArrayList<Integer>> listaBuckets = new ArrayList<>();
-        /* A COMPLETAR POR EL ALUMNO */
+        for (int i = 0; i < num_threads; i++) {
+            listaBuckets.add(new ArrayList<>());
+        }
 
         // Distribuir cada número en su bucket correspondiente
-        // Índice calculado mediante: índice = round((number + |min|) / amp)
+        // Índice calculado mediante: índice = floor((number + |min|) / amp)
         // Atención: el cálculo debe quedar dentro de [0, num_threads-1]. Si hay valores extremos o amp==0, puede fallar.
-        /* A COMPLETAR POR EL ALUMNO */
+        for (Integer number : numbers) {
+            int bucketIndex = (int) Math.floor((number + Math.abs(min)) / amp);
+
+            listaBuckets.get(bucketIndex).add(number);
+        }
 
         
         // Array de hilos, uno por bucket
-        /* A COMPLETAR POR EL ALUMNO */
+        Thread[] hilos = new Thread[num_threads];
 
         int i = 0;
         // Para cada bucket lanzar un hilo que lo ordene
-        for (ArrayList<Integer> listaBucket : listaBuckets) {
+        for (ArrayList<Integer> bucket : listaBuckets) {
             // Cada Tarea ordena la cubeta actual
-            // Añadir un mensaje informativo para depuración/seguimiento
-            /* A COMPLETAR POR EL ALUMNO */
-            
-            
+            Runnable tarea = () -> {
+                // Ordenar la cubeta actual
+                System.out.println("Ordenando, bb");
+                Collections.sort(bucket);
+            };
+
+
+
             // Crear y arrancar el hilo para la cubeta
-            /* A COMPLETAR POR EL ALUMNO */
+            Thread hilo = new Thread(tarea);
+            hilo.start();
+
+            hilos[i] = hilo;
 
             i++;
         }
 
         // Esperar a que todos los hilos terminen y controlar la Excepcion InterruptedException
-        /* A COMPLETAR POR EL ALUMNO */
+        for (Thread hilo : hilos) {
+            try {
+                hilo.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Unable to short the bucket: " + e.getMessage());
+            }
+        }
 
         // Concatenar los buckets ordenados en el resultado final
         // Limpiar el bucket para liberar memoria más rápidamente (no estrictamente necesario)
-        /* A COMPLETAR POR EL ALUMNO */
+        for (ArrayList<Integer> bucket : listaBuckets) {
+            numbersSort.addAll(bucket);
+
+            bucket.clear();
+        }
 
         // Limpiar la lista de buckets (buena práctica antes de devolver el resultado)
-        /* A COMPLETAR POR EL ALUMNO */
+        listaBuckets.clear();
 
         return numbersSort;
     }

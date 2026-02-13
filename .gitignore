@@ -1,29 +1,33 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+# IntelliJ / IDE
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-### VS Code ###
-.vscode/
+# Java
+*.class
+*.log
+*.tmp
 
-### Mac OS ###
+# Sistema
 .DS_Store
+Thumbs.db
+
+# Editor swaps
+*~
+*.swp
+
+# Ficheros de datos grandes de la práctica
+# - Si NO quieres subirlos al repositorio, deja la regla de ignorado.
+# - Si quieres versionarlos con Git LFS, comenta la regla o usa la excepción '!numeros_*.txt'.
+#
+numeros_*.txt
+
+# Si quieres poder añadirlos (por ejemplo con Git LFS), deja esta excepción:
+#!numeros_*.txt

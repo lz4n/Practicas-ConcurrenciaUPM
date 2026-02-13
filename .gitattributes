@@ -1,2 +1,4 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Gestionar ficheros grandes de instancias con Git LFS
+# Requiere tener Git LFS instalado y que el proyecto en GitLab tenga LFS habilitado.
+
+numeros_*.txt filter=lfs diff=lfs merge=lfs -text

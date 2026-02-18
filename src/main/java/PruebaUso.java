@@ -26,11 +26,11 @@ public class PruebaUso {
         int numThreads = 4;
 
         // Ejecuta una evaluación concreta (instancia + hilos).
-        TP.evaluarPractica(instancia, numThreads);
+        //TP.evaluarPractica(instancia, numThreads);
 
         // --- Ejemplos opcionales (tiradas más completas) ---
         // Ejecutar todas las prácticas/instancias disponibles.
-        // TP.evaluarPracticasALL();
+        //TP.evaluarPracticasALL();
 
         // Comparación entre prácticas (requiere haber ejecutado evaluaciones).
         // TP.graficarResultadosComparacion(TP.evaluarPracticasALL());
@@ -39,7 +39,7 @@ public class PruebaUso {
         // TP.graficarResultadosComparacionThreads(TP.evaluarPracticasThreads(TesterPracticas.Instancias.NUMBER_2500000));
 
         // Gráficas de mejora/speedup (depende de lo que ofrezca la librería).
-        // TP.graficarResultadosMejora(TP.evaluarPracticasALL());
-        // TP.graficarResultadosMejoraThreads(TP.evaluarPracticasThreads(TesterPracticas.Instancias.NUMBER_2500000));
+         TP.graficarResultadosMejora(TP.evaluarPracticasALL());
+         TP.graficarResultadosMejoraThreads(TP.evaluarPracticasThreads(TesterPracticas.Instancias.NUMBER_2500000));
     }
 }
